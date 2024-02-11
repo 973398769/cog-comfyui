@@ -43,6 +43,9 @@ class WeightsDownloader:
         if weight_str == "swizz8_REALBakedvaeFP16.safetensors":
             print("weight_str is swizz8, reset download url")
             url = "https://civitai.com/api/download/models/180074"
+        if weight_str == "hand_yolov8s.pt":
+            print("weight_str is hand yolo8s, reset download url")
+            url = "https://huggingface.co/Bingsu/adetailer/blob/main/hand_yolov8s.pt"
         if "/" in weight_str:
             subfolder = weight_str.rsplit("/", 1)[0]
             dest = os.path.join(dest, subfolder)
@@ -50,8 +53,8 @@ class WeightsDownloader:
 
         print(f"⏳ Downloading {weight_str} to {dest}")
         start = time.time()
-        if weight_str == "swizz8_REALBakedvaeFP16.safetensors":
-            print("weight_str is swizz8, reset download command")
+        if weight_str == "swizz8_REALBakedvaeFP16.safetensors" or weight_str == "hand_yolov8s.pt":
+            print("weight_str is swizz8/handYolo, reset download command")
             subprocess.check_call(
                 ["wget", "-o", "swizz8_REALBakedvaeFP16.safetensors", "https://civitai.com/api/download/models/180074", "-P", dest], close_fds=False
             )
