@@ -300,6 +300,11 @@
 - yolov5l-face.pth
 - yolov5n-face.pth
 
+## Hands detection models
+
+- hand_yolov8s.pt
+
+
 ## AnimateDiff
 
 - mm_sd_v14.ckpt

@@ -295,6 +295,10 @@
     "parsing_parsenet.pth",
     "yolov5l-face.pth",
     "yolov5n-face.pth"
+
+  ],
+  "HANDDETECTION": [
+    "hand_yolov8s.pt"
   ],
   "FACERESTORE_MODELS": [
     "codeformer.pth",
