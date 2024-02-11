@@ -53,6 +53,7 @@
 - v2-1_768-nonema-pruned.safetensors
 - wd-illusion-fp16.safetensors
 - x4-upscaler-ema.safetensors
+- swizz8_REALBakedvaeFP16.safetensors
 
 ## Upscale models
 
