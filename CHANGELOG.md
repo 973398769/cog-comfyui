@@ -18,6 +18,7 @@ Face restoration and detection models:
 - parsing_parsenet.pth
 - yolov5l-face.pth
 - yolov5n-face.pth
+- bbox/hand_yolov8s.pt
 
 ## 2024-01-23
 

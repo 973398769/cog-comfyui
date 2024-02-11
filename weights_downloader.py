@@ -43,7 +43,7 @@ class WeightsDownloader:
         if weight_str == "swizz8_REALBakedvaeFP16.safetensors":
             print("weight_str is swizz8, reset download url")
             url = "https://civitai.com/api/download/models/180074"
-        if weight_str == "hand_yolov8s.pt":
+        if weight_str == "bbox/hand_yolov8s.pt":
             print("weight_str is hand yolo8s, reset download url")
             url = "https://huggingface.co/Bingsu/adetailer/blob/main/hand_yolov8s.pt"
         if "/" in weight_str:

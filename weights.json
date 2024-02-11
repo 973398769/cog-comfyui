@@ -298,7 +298,7 @@
 
   ],
   "HANDDETECTION": [
-    "hand_yolov8s.pt"
+    "bbox/hand_yolov8s.pt"
   ],
   "FACERESTORE_MODELS": [
     "codeformer.pth",
