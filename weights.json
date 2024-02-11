@@ -52,7 +52,8 @@
     "v2-1_768-nonema-pruned.ckpt",
     "v2-1_768-nonema-pruned.safetensors",
     "wd-illusion-fp16.safetensors",
-    "x4-upscaler-ema.safetensors"
+    "x4-upscaler-ema.safetensors",
+    "swizz8_REALBakedvaeFP16.safetensors"
   ],
   "UPSCALE_MODELS": [
     "4x-AnimeSharp.pth",
