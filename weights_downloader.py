@@ -54,16 +54,19 @@ class WeightsDownloader:
         print(f"⏳ Downloading {weight_str} to {dest}")
         start = time.time()
         if weight_str == "swizz8_REALBakedvaeFP16.safetensors":
+            dest = "ComfyUI/models/checkpoints/swizz8_REALBakedvaeFP16.safetensors"
             print("weight_str is swizz8/handYolo, reset download command")
             subprocess.check_call(
-                ["wget", "-o", "swizz8_REALBakedvaeFP16.safetensors", "https://civitai.com/api/download/models/180074", "-P", dest], close_fds=False
+                # ["wget", "-o", "swizz8_REALBakedvaeFP16.safetensors", "https://civitai.com/api/download/models/180074", "-P", dest], close_fds=False
+                ["pget", "--log-level", "warn", "-f", url, dest], close_fds=False
             )
         elif weight_str == "bbox/hand_yolov8s.pt":
             print("weight_str is handYolo, reset download command")
-            dest = "ComfyUI/models/ultralytics"
+            dest = "ComfyUI/models/ultralytics/bbox/hand_yolov8s.pt"
             subprocess.check_call(
-                ["wget", "-o", "hand_yolov8s.pt", "https://civitai.com/api/download/models/180074",
-                 "-P", dest], close_fds=False
+                # ["wget", "-o", "hand_yolov8s.pt", "https://civitai.com/api/download/models/180074",
+                #  "-P", dest], close_fds=False
+                ["pget", "--log-level", "warn", "-f", url, dest], close_fds=False
             )
         else:
             subprocess.check_call(
