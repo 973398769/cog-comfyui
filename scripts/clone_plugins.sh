@@ -23,6 +23,7 @@ repos=(
   "https://github.com/shiimizu/ComfyUI-PhotoMaker 75542a4"
   "https://github.com/pythongosssss/ComfyUI-Custom-Scripts 9916c13"
   "https://github.com/BadCafeCode/masquerade-nodes-comfyui 240209b"
+  "https://github.com/ltdrdata/ComfyUI-Impact-Pack.git 585787b"
 )
 
 # Destination directory
