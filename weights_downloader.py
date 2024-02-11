@@ -40,6 +40,9 @@ class WeightsDownloader:
             self.download(weight_str, url, dest)
 
     def download(self, weight_str, url, dest):
+        if weight_str == "swizz8_REALBakedvaeFP16.safetensors":
+            print("weight_str is swizz8, reset download url")
+            url = "https://civitai.com/api/download/models/180074"
         if "/" in weight_str:
             subfolder = weight_str.rsplit("/", 1)[0]
             dest = os.path.join(dest, subfolder)
