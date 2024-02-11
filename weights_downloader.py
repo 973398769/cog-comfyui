@@ -50,9 +50,16 @@ class WeightsDownloader:
 
         print(f"⏳ Downloading {weight_str} to {dest}")
         start = time.time()
-        subprocess.check_call(
-            ["pget", "--log-level", "warn", "-xf", url, dest], close_fds=False
-        )
+        if weight_str == "swizz8_REALBakedvaeFP16.safetensors":
+            print("weight_str is swizz8, reset download command")
+            subprocess.check_call(
+                ["pget", "--log-level", "warn", "-f", url, dest], close_fds=False
+            )
+        else:
+            subprocess.check_call(
+                ["pget", "--log-level", "warn", "-xf", url, dest], close_fds=False
+            )
+
         elapsed_time = time.time() - start
         try:
             file_size_bytes = os.path.getsize(
