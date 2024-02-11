@@ -60,7 +60,7 @@ class WeightsDownloader:
             )
         elif weight_str == "bbox/hand_yolov8s.pt":
             print("weight_str is handYolo, reset download command")
-            dest = "ComfyUI/models/ultralytics/bbox"
+            dest = "ComfyUI/models/ultralytics"
             subprocess.check_call(
                 ["wget", "-o", "hand_yolov8s.pt", "https://civitai.com/api/download/models/180074",
                  "-P", dest], close_fds=False
@@ -72,12 +72,17 @@ class WeightsDownloader:
 
         elapsed_time = time.time() - start
         try:
-            file_size_bytes = os.path.getsize(
-                os.path.join(dest, os.path.basename(weight_str))
-            )
-            file_size_megabytes = file_size_bytes / (1024 * 1024)
-            print(
-                f"⌛️ Downloaded {weight_str} in {elapsed_time:.2f}s, size: {file_size_megabytes:.2f}MB"
-            )
+            dest_file_path = os.path.join(dest, os.path.basename(weight_str))
+            print(f"The weight is {dest_file_path}")
+            if os.path.exists(dest_file_path):
+                file_size_bytes = os.path.getsize(
+                    os.path.join(dest_file_path)
+                )
+                file_size_megabytes = file_size_bytes / (1024 * 1024)
+                print(
+                    f"⌛️ Downloaded {weight_str} in {elapsed_time:.2f}s, size: {file_size_megabytes:.2f}MB"
+                )
+            else:
+                print(f"The {dest_file_path} is not exist")
         except FileNotFoundError:
             print(f"Warning: Could not get the file size for {weight_str}")
