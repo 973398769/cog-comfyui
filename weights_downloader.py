@@ -53,7 +53,7 @@ class WeightsDownloader:
         if weight_str == "swizz8_REALBakedvaeFP16.safetensors":
             print("weight_str is swizz8, reset download command")
             subprocess.check_call(
-                ["wget", "-0", "swizz8_REALBakedvaeFP16.safetensors", "https://civitai.com/api/download/models/180074", "-P", dest], close_fds=False
+                ["wget", "-o", "swizz8_REALBakedvaeFP16.safetensors", "https://civitai.com/api/download/models/180074", "-P", dest], close_fds=False
             )
         else:
             subprocess.check_call(
