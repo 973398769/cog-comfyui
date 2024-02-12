@@ -91,7 +91,7 @@ class Predictor(BasePredictor):
         # TODO: Record the previous models loaded
         # If different, run /free to free up models and memory
 
-        workflow_json = choose_workflow(function_name)
+        workflow_json = choose_workflow(function_name, input_file)
         wf = self.comfyUI.load_workflow(workflow_json or EXAMPLE_WORKFLOW_JSON)
 
         if randomise_seeds:
@@ -111,9 +111,10 @@ class Predictor(BasePredictor):
 
         return files
 
-def choose_workflow(function_name):
+def choose_workflow(function_name, input_file):
     workflow_json = json.dumps({})
     if function_name == "hand_restoration":
         with open("examples/hands_restoration_api.json", "r") as file:
             workflow_json = file.read()
+            workflow_json["57"]["inputs"]["image"] = input_file
     return workflow_json
