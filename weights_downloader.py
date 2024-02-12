@@ -54,6 +54,10 @@ class WeightsDownloader:
         print(f"⏳ Downloading {weight_str} to {dest}")
         start = time.time()
         if weight_str == "swizz8_REALBakedvaeFP16.safetensors":
+            folder_path = "ComfyUI/models/checkpoints/"
+            if os.path.exists(folder_path):
+                print(f"The {folder_path} is not exist, create it")
+                os.makedirs(folder_path)
             dest = "ComfyUI/models/checkpoints/swizz8_REALBakedvaeFP16.safetensors"
             print("weight_str is swizz8, reset download command")
             subprocess.check_call(
@@ -61,6 +65,10 @@ class WeightsDownloader:
                 # ["pget", "-f", url, dest], close_fds=False
             )
         elif weight_str == "bbox/hand_yolov8s.pt":
+            folder_path = "ComfyUI/models/ultralytics/bbox/"
+            if os.path.exists(folder_path):
+                print(f"The {folder_path} is not exist, create it")
+                os.makedirs(folder_path)
             print("weight_str is handYolo, reset download command")
             dest = "ComfyUI/models/ultralytics/bbox/hand_yolov8s.pt"
             subprocess.check_call(
