@@ -24,6 +24,7 @@ repos=(
   "https://github.com/pythongosssss/ComfyUI-Custom-Scripts 9916c13"
   "https://github.com/BadCafeCode/masquerade-nodes-comfyui 240209b"
   "https://github.com/ltdrdata/ComfyUI-Impact-Pack 585787b"
+  "https://github.com/mav-rik/facerestore_cf 2b5d727"
 )
 
 # Destination directory
