@@ -94,7 +94,7 @@ class Predictor(BasePredictor):
         if not workflow_json:
             print("import workflow from examples path")
             workflow_json = choose_workflow(function_name, input_file)
-
+        check_custom_nodes()
         wf = self.comfyUI.load_workflow(workflow_json or EXAMPLE_WORKFLOW_JSON)
 
         if randomise_seeds:
@@ -113,6 +113,16 @@ class Predictor(BasePredictor):
             files.extend(self.log_and_collect_files(directory))
 
         return files
+
+def check_custom_nodes():
+    items = os.listdir("ComfyUI/custom_nodes/")
+    for item in items:
+        print(f"custom node is {item}")
+        if item == "facerestore_cf":
+            print("facerestore_cf is exist")
+            facerestore_items = os.listdir("ComfyUI/custom_nodes/facerestore_cf/")
+            for facerestore_item in facerestore_items:
+                print(f"facerestore_item is {facerestore_item}")
 
 def choose_workflow(function_name, input_file):
     workflow_json = json.dumps({})
