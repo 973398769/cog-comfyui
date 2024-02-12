@@ -55,7 +55,7 @@ class WeightsDownloader:
         start = time.time()
         if weight_str == "swizz8_REALBakedvaeFP16.safetensors":
             folder_path = "ComfyUI/models/checkpoints/"
-            if os.path.exists(folder_path):
+            if not os.path.exists(folder_path):
                 print(f"The {folder_path} is not exist, create it")
                 os.makedirs(folder_path)
             dest = "ComfyUI/models/checkpoints/swizz8_REALBakedvaeFP16.safetensors"
@@ -66,7 +66,7 @@ class WeightsDownloader:
             )
         elif weight_str == "bbox/hand_yolov8s.pt":
             folder_path = "ComfyUI/models/ultralytics/bbox/"
-            if os.path.exists(folder_path):
+            if not os.path.exists(folder_path):
                 print(f"The {folder_path} is not exist, create it")
                 os.makedirs(folder_path)
             print("weight_str is handYolo, reset download command")
