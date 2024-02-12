@@ -45,7 +45,7 @@ class WeightsDownloader:
             url = "https://civitai.com/api/download/models/180074"
         if weight_str == "bbox/hand_yolov8s.pt":
             print("weight_str is hand yolo8s, reset download url")
-            url = "https://huggingface.co/Bingsu/adetailer/blob/main/hand_yolov8s.pt"
+            url = "https://cdn-lfs.huggingface.co/repos/0d/db/0ddb8d3fcb6ee9737d9dd7e090e6c6cb6e40728d12307180160e7f654cb345de/30878cea9870964d4a238339e9dcff002078bbbaa1a058b07e11c167f67eca1c?response-content-disposition=attachment%3B+filename*%3DUTF-8%27%27hand_yolov8s.pt%3B+filename%3D%22hand_yolov8s.pt%22%3B&Expires=1707967321&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcwNzk2NzMyMX19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5odWdnaW5nZmFjZS5jby9yZXBvcy8wZC9kYi8wZGRiOGQzZmNiNmVlOTczN2Q5ZGQ3ZTA5MGU2YzZjYjZlNDA3MjhkMTIzMDcxODAxNjBlN2Y2NTRjYjM0NWRlLzMwODc4Y2VhOTg3MDk2NGQ0YTIzODMzOWU5ZGNmZjAwMjA3OGJiYmFhMWEwNThiMDdlMTFjMTY3ZjY3ZWNhMWM%7EcmVzcG9uc2UtY29udGVudC1kaXNwb3NpdGlvbj0qIn1dfQ__&Signature=T7-D9DMNMBzh8F6rP6ONHygAp09VA9venGnWH2Tq%7EOqoSTaRoDCATjBBa5TPdVjHXQQnII3FjSJVqvHWw1TgbMIelMH7OZARrq%7EbEkEJFfZ5r5U9VUAnYeB2Hy52uV96NJWZNH4BD3rGnyJymKiNupvvhQHVpzrozaO7ncs5XZD5N16qqvnUrxFP0iVIG-A84V5G650hLljTge0oA8%7EcQ-fLF7tSYxjwrMvhlY3MNY4fq-2gJDhcHaFaLvFHETrFEkt9dqTzeGWfHFBR5c0KVKXeFnlIfWU2tM4BrKdOPXhStVoqvBQjipSQDIHc9SxSBc06Yiskjoa09L3yDmIJJA__&Key-Pair-Id=KVTP0A1DKRTAX"
         if "/" in weight_str:
             subfolder = weight_str.rsplit("/", 1)[0]
             dest = os.path.join(dest, subfolder)
@@ -57,16 +57,15 @@ class WeightsDownloader:
             dest = "ComfyUI/models/checkpoints/swizz8_REALBakedvaeFP16.safetensors"
             print("weight_str is swizz8, reset download command")
             subprocess.check_call(
-                # ["wget", "-o", "swizz8_REALBakedvaeFP16.safetensors", "https://civitai.com/api/download/models/180074", "-P", dest], close_fds=False
-                ["pget", "-f", url, dest], close_fds=False
+                ["wget", "-O", dest, url], close_fds=False
+                # ["pget", "-f", url, dest], close_fds=False
             )
         elif weight_str == "bbox/hand_yolov8s.pt":
             print("weight_str is handYolo, reset download command")
             dest = "ComfyUI/models/ultralytics/bbox/hand_yolov8s.pt"
             subprocess.check_call(
-                # ["wget", "-o", "hand_yolov8s.pt", "https://civitai.com/api/download/models/180074",
-                #  "-P", dest], close_fds=False
-                ["pget", "-f", url, dest], close_fds=False
+                ["wget", "-O", dest, url], close_fds=False
+                # ["pget", "-f", url, dest], close_fds=False
             )
         else:
             subprocess.check_call(
