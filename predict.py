@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 import tarfile
@@ -59,10 +60,15 @@ class Predictor(BasePredictor):
 
     def predict(
         self,
-        workflow_json: str = Input(
-            description="Your ComfyUI workflow as JSON. You must use the API version of your workflow. Get it from ComfyUI using ‘Save (API format)’. Instructions here: https://github.com/fofr/cog-comfyui",
-            default="",
+        function_name: str = Input(
+            description="The specific function you need, such as: hand_restoration, face_restoration",
+            choices=['hand_restoration', 'face_restoration', 'all'],
+            default="hand_restoration",
         ),
+        # workflow_json: str = Input(
+        #     description="Your ComfyUI workflow as JSON. You must use the API version of your workflow. Get it from ComfyUI using ‘Save (API format)’. Instructions here: https://github.com/fofr/cog-comfyui",
+        #     default="",
+        # ),
         input_file: Path = Input(
             description="Input image, tar or zip file. Read guidance on workflows and input files here: https://github.com/fofr/cog-comfyui. Alternatively, you can replace inputs with URLs in your JSON workflow and the model will download them.",
             default=None,
@@ -85,6 +91,7 @@ class Predictor(BasePredictor):
         # TODO: Record the previous models loaded
         # If different, run /free to free up models and memory
 
+        workflow_json = choose_workflow(function_name)
         wf = self.comfyUI.load_workflow(workflow_json or EXAMPLE_WORKFLOW_JSON)
 
         if randomise_seeds:
@@ -103,3 +110,10 @@ class Predictor(BasePredictor):
             files.extend(self.log_and_collect_files(directory))
 
         return files
+
+def choose_workflow(function_name):
+    workflow_json = json.dumps({})
+    if function_name == "hand_restoration":
+        with open("examples/hands_restoration_api.json", "r") as file:
+            workflow_json = file.read()
+    return workflow_json

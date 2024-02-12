@@ -1,0 +1,238 @@
+{
+  "15": {
+    "inputs": {
+      "strength": 0.8,
+      "segs": [
+        "18",
+        0
+      ],
+      "control_net": [
+        "16",
+        0
+      ],
+      "segs_preprocessor": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "ImpactControlNetApplySEGS",
+    "_meta": {
+      "title": "ControlNetApply (SEGS)"
+    }
+  },
+  "16": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15_openpose.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "17": {
+    "inputs": {
+      "detect_hand": true,
+      "detect_body": false,
+      "detect_face": false,
+      "resolution_upscale_by": 1
+    },
+    "class_type": "DWPreprocessor_Provider_for_SEGS //Inspire",
+    "_meta": {
+      "title": "DWPreprocessor Provider (SEGS)"
+    }
+  },
+  "18": {
+    "inputs": {
+      "bbox_threshold": 0.5,
+      "bbox_dilation": 0,
+      "crop_factor": 5,
+      "drop_size": 10,
+      "sub_threshold": 0.5,
+      "sub_dilation": 0,
+      "sub_bbox_expansion": 0,
+      "sam_mask_hint_threshold": 0.7000000000000001,
+      "post_dilation": 0,
+      "bbox_detector": [
+        "19",
+        0
+      ],
+      "image": [
+        "57",
+        0
+      ]
+    },
+    "class_type": "ImpactSimpleDetectorSEGS",
+    "_meta": {
+      "title": "Simple Detector (SEGS)"
+    }
+  },
+  "19": {
+    "inputs": {
+      "model_name": "bbox/hand_yolov8s.pt"
+    },
+    "class_type": "UltralyticsDetectorProvider",
+    "_meta": {
+      "title": "UltralyticsDetectorProvider"
+    }
+  },
+  "43": {
+    "inputs": {
+      "guide_size": 256,
+      "guide_size_for": true,
+      "max_size": 768,
+      "seed": 1086598003577667,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 0.6,
+      "feather": 5,
+      "noise_mask": true,
+      "force_inpaint": true,
+      "wildcard": "",
+      "refiner_ratio": 0.2,
+      "cycle": 1,
+      "inpaint_model": false,
+      "noise_mask_feather": 10,
+      "image": [
+        "57",
+        0
+      ],
+      "segs": [
+        "15",
+        0
+      ],
+      "basic_pipe": [
+        "53:3",
+        0
+      ]
+    },
+    "class_type": "DetailerForEachDebugPipe",
+    "_meta": {
+      "title": "DetailerDebug (SEGS/pipe)"
+    }
+  },
+  "51": {
+    "inputs": {
+      "guide_size": 360,
+      "guide_size_for": true,
+      "max_size": 768,
+      "seed": 307114975231405,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 0.4,
+      "feather": 5,
+      "noise_mask": true,
+      "force_inpaint": true,
+      "wildcard": "",
+      "refiner_ratio": 0.2,
+      "cycle": 1,
+      "inpaint_model": false,
+      "noise_mask_feather": 10,
+      "image": [
+        "43",
+        0
+      ],
+      "segs": [
+        "43",
+        1
+      ],
+      "basic_pipe": [
+        "43",
+        2
+      ]
+    },
+    "class_type": "DetailerForEachDebugPipe",
+    "_meta": {
+      "title": "DetailerDebug (SEGS/pipe)"
+    }
+  },
+  "57": {
+    "inputs": {
+      "image": "https://replicate.delivery/pbxt/KAaJWyluKBrWzbe5EhQArYZcVXdpOvcLyF81menWifyusgCe/1.jpeg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "58": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "51",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "53:0": {
+    "inputs": {
+      "ckpt_name": "swizz8_REALBakedvaeFP16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "53:1": {
+    "inputs": {
+      "text": "photograph, 1girl, cropped",
+      "clip": [
+        "53:0",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "53:2": {
+    "inputs": {
+      "text": "text, watermark, embedding:bhands-neg, cartoon, painting, (lineart:1.2)",
+      "clip": [
+        "53:0",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "53:3": {
+    "inputs": {
+      "model": [
+        "53:0",
+        0
+      ],
+      "clip": [
+        "53:0",
+        1
+      ],
+      "vae": [
+        "53:0",
+        2
+      ],
+      "positive": [
+        "53:1",
+        0
+      ],
+      "negative": [
+        "53:2",
+        0
+      ]
+    },
+    "class_type": "ToBasicPipe",
+    "_meta": {
+      "title": "ToBasicPipe"
+    }
+  }
+}
