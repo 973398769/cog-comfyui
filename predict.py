@@ -65,10 +65,10 @@ class Predictor(BasePredictor):
             choices=['hand_restoration', 'face_restoration', 'all'],
             default="hand_restoration",
         ),
-        # workflow_json: str = Input(
-        #     description="Your ComfyUI workflow as JSON. You must use the API version of your workflow. Get it from ComfyUI using ‘Save (API format)’. Instructions here: https://github.com/fofr/cog-comfyui",
-        #     default="",
-        # ),
+        workflow_json: str = Input(
+            description="Your ComfyUI workflow as JSON. You must use the API version of your workflow. Get it from ComfyUI using ‘Save (API format)’. Instructions here: https://github.com/fofr/cog-comfyui",
+            default="",
+        ),
         input_file: Path = Input(
             description="Input image, tar or zip file. Read guidance on workflows and input files here: https://github.com/fofr/cog-comfyui. Alternatively, you can replace inputs with URLs in your JSON workflow and the model will download them.",
             default=None,
@@ -91,7 +91,10 @@ class Predictor(BasePredictor):
         # TODO: Record the previous models loaded
         # If different, run /free to free up models and memory
 
-        workflow_json = choose_workflow(function_name, input_file)
+        if not workflow_json:
+            print("import workflow from examples path")
+            workflow_json = choose_workflow(function_name, input_file)
+
         wf = self.comfyUI.load_workflow(workflow_json or EXAMPLE_WORKFLOW_JSON)
 
         if randomise_seeds:
@@ -117,4 +120,8 @@ def choose_workflow(function_name, input_file):
         with open("examples/hands_restoration_api.json", "r") as file:
             workflow_json = file.read()
             workflow_json["57"]["inputs"]["image"] = input_file
+    if function_name == "face_restoration":
+        with open("examples/faces_restoration_api.json", "r") as file:
+            workflow_json = file.read()
+            workflow_json["3"]["inputs"]["image"] = input_file
     return workflow_json
