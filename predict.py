@@ -123,15 +123,18 @@ def check_custom_nodes():
             facerestore_items = os.listdir("ComfyUI/custom_nodes/facerestore_cf/")
             for facerestore_item in facerestore_items:
                 print(f"facerestore_item is {facerestore_item}")
+                if facerestore_item == "__init__.py":
+                    with open("ComfyUI/custom_nodes/facerestore_cf/__init__.py") as it:
+                        print(it.read())
 
 def choose_workflow(function_name, input_file):
     workflow_json = json.dumps({})
     if function_name == "hand_restoration":
         with open("examples/hands_restoration_api.json", "r") as file:
-            workflow_json = file.read()
+            workflow_json = json.load(file)
             workflow_json["57"]["inputs"]["image"] = input_file
     if function_name == "face_restoration":
         with open("examples/faces_restoration_api.json", "r") as file:
-            workflow_json = file.read()
+            workflow_json = json.load(file)
             workflow_json["3"]["inputs"]["image"] = input_file
-    return workflow_json
+    return json.dumps(workflow_json)
