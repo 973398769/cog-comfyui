@@ -137,4 +137,4 @@ def choose_workflow(function_name, input_file):
         with open("examples/faces_restoration_api.json", "r") as file:
             workflow_json = json.load(file)
             workflow_json["3"]["inputs"]["image"] = input_file
-    return json.dumps(workflow_json)
+    return workflow_json
