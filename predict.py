@@ -132,9 +132,9 @@ def choose_workflow(function_name, input_file):
     if function_name == "hand_restoration":
         with open("examples/hands_restoration_api.json", "r") as file:
             workflow_json = json.load(file)
-            workflow_json["57"]["inputs"]["image"] = input_file
+            workflow_json["57"]["inputs"]["image"] = str(input_file)
     if function_name == "face_restoration":
         with open("examples/faces_restoration_api.json", "r") as file:
             workflow_json = json.load(file)
-            workflow_json["3"]["inputs"]["image"] = input_file
+            workflow_json["3"]["inputs"]["image"] = str(input_file)
     return workflow_json
