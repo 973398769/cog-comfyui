@@ -61,14 +61,14 @@ class Predictor(BasePredictor):
     def predict(
         self,
         function_name: str = Input(
-            description="The specific function you need, such as: hand_restoration, face_restoration",
-            choices=['hand_restoration', 'face_restoration', 'all'],
+            description="The specific function you need, such as: hand_restoration",
+            choices=['hand_restoration'],
             default="hand_restoration",
         ),
-        workflow_json: str = Input(
-            description="Your ComfyUI workflow as JSON. You must use the API version of your workflow. Get it from ComfyUI using ‘Save (API format)’. Instructions here: https://github.com/fofr/cog-comfyui",
-            default="",
-        ),
+        # workflow_json: str = Input(
+        #     description="Your ComfyUI workflow as JSON. You must use the API version of your workflow. Get it from ComfyUI using ‘Save (API format)’. Instructions here: https://github.com/fofr/cog-comfyui",
+        #     default="",
+        # ),
         input_file: Path = Input(
             description="Input image, tar or zip file. Read guidance on workflows and input files here: https://github.com/fofr/cog-comfyui. Alternatively, you can replace inputs with URLs in your JSON workflow and the model will download them.",
             default=None,
