@@ -91,9 +91,9 @@ class Predictor(BasePredictor):
         # TODO: Record the previous models loaded
         # If different, run /free to free up models and memory
 
-        if not workflow_json:
-            print("import workflow from examples path")
-            workflow_json = choose_workflow(function_name, input_file)
+
+        print("import workflow from examples path")
+        workflow_json = choose_workflow(function_name, input_file)
         check_custom_nodes()
         wf = self.comfyUI.load_workflow(workflow_json or EXAMPLE_WORKFLOW_JSON)
 
